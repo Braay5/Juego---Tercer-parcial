@@ -12,6 +12,8 @@ public class Enemy : Fighter
     float searchRange = 1;
     [SerializeField]
     float stoppingDistance = 0.3f;
+    [SerializeField]
+    int ScoreToAdd;
 
 
     Transform player;
@@ -22,13 +24,19 @@ public class Enemy : Fighter
         player = GameObject.FindGameObjectWithTag("Player").transform;
         InvokeRepeating("SetTarget", 0, 5);
         InvokeRepeating("SendPunch", 0, 5);
+        init();
+    }
+
+    public void AddScore()
+    {
+        Score.singleton.score += ScoreToAdd;
     }
 
     protected override void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, searchRange);
-        Gizmos.DrawWireSphere(target, 1f);
+        Gizmos.DrawWireSphere(target, 0.2f);
 
         base.OnDrawGizmosSelected();
     }
@@ -39,12 +47,7 @@ public class Enemy : Fighter
             return;
         if (vel.magnitude != 0)
             return;
-        if (!anim.GetCurrentAnimatorStateInfo(0).IsName("Punch")
-            && !anim.GetCurrentAnimatorStateInfo(0).IsName("GetPunch")
-            && !anim.GetCurrentAnimatorStateInfo(0).IsName("Guard"))
-        {
-            anim.SetTrigger("SetPunch");
-        }
+            StartCoroutine(Punch());
     }
 
     void SetTarget()
@@ -55,6 +58,11 @@ public class Enemy : Fighter
             Random.Range(LimitsY.y, LimitsY.x));
     }
 
+    public override void init()
+    {
+        base.init();
+    }
+
     Vector2 vel;
 
     // Update is called once per frame
@@ -63,7 +71,7 @@ public class Enemy : Fighter
         if(state == States.pursuit)
         {
             target = player.transform.position;
-            if(Vector3.Distance(target, transform.position) > searchRange * 1.2f)
+            if(Vector2.Distance(target, transform.position) > searchRange * 1.2f)
             {
                 target = transform.position;
                 state = States.patrol;
@@ -82,18 +90,16 @@ public class Enemy : Fighter
                 }
             }
         }
-
         vel = target - transform.position;
         sr.flipX = vel.x < 0;
         if (vel.magnitude < stoppingDistance)
             vel = Vector2.zero;
         vel.Normalize();
-
         if (!anim.GetCurrentAnimatorStateInfo(0).IsName("Punch")
             && !anim.GetCurrentAnimatorStateInfo(0).IsName("GetPunch")
             && !anim.GetCurrentAnimatorStateInfo(0).IsName("Guard"))
         {
-            anim.SetBool("Walking", vel.magnitude != 0);
+            anim.SetBool("IsWalking", vel.magnitude != 0);
         }
         else
         {

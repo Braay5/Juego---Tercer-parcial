@@ -18,9 +18,11 @@ public class Player1 : Fighter
             sr.flipX = cntrl.x < 0;
 
         if (Input.GetKeyDown(KeyCode.Z))
-            anim.SetTrigger("SetPunch");
+            StartCoroutine(Punch());
 
-        anim.SetBool("IsGuard", Input.GetKey(KeyCode.X));
+        isGuard = Input.GetKey(KeyCode.X);
+
+        anim.SetBool("IsGuard", isGuard);
 
 
         if (!anim.GetCurrentAnimatorStateInfo(0).IsName("Punch")
