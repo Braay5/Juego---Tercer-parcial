@@ -8,7 +8,7 @@ Pero no contaban con que Martín llevó clases de karate y kung fu, así que uno
 
 Instrucciones: 
 
-Derrota a todos los zombies que encuentres por delante, la direccion correcta es hacia la derecha, así que no te confundas.
+Derrota a todos los zombies que encuentres por delante, la direccion correcta es hacia la derecha, así que no te confundas. Golpea a todos los zombies, derrotalos uno a uno, y sal victorioso contra la horda.
 
 Controles:
 
