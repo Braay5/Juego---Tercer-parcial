@@ -25,6 +25,7 @@ public class Enemy : Fighter
         InvokeRepeating("SetTarget", 0, 5);
         InvokeRepeating("SendPunch", 0, 5);
         init();
+
     }
 
     public void AddScore()

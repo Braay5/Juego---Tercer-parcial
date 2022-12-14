@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Score : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class Score : MonoBehaviour
             whenScoreChange.Invoke(_score.ToString());
         }
     }
+
     [SerializeField]
     protected MyStringEvent whenScoreChange;
 
@@ -32,4 +34,14 @@ public class Score : MonoBehaviour
 
         whenScoreChange.Invoke(_score.ToString());
     }
+
+    private void Update()
+    {
+        if(_score >= 900)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
+    }
+
+
 }

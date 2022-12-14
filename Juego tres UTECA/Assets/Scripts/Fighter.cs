@@ -69,6 +69,14 @@ public class Fighter : MonoBehaviour
 
     protected bool isGuard = false;
 
+    //[SerializeField]
+    //private AudioClip golpeadoSonido;
+    //[SerializeField]
+    //private AudioClip caminandoSonido;
+    //[SerializeField]
+    //private AudioClip golpeandoAudio;
+
+
     protected virtual void OnDrawGizmosSelected()
     {
         if (leftPunch == null || rightPunch == null)
@@ -100,7 +108,7 @@ public class Fighter : MonoBehaviour
         whenLifesChange.Invoke(_lifes.ToString());
     }
 
-    void GetPunch()
+    public virtual void GetPunch()
     {
         if (isGuard)
         {
@@ -109,6 +117,7 @@ public class Fighter : MonoBehaviour
         }
         anim.SetTrigger("GetPunch");
         lifes--;
+        
         if (lifes <= 0)
         {
             whenDie.Invoke();

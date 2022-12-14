@@ -6,6 +6,13 @@ using UnityEngine.SceneManagement;
 
 public class Player1 : Fighter
 {
+    [SerializeField]
+    public AudioClip golpeSonido;
+
+    public static ControladorSonidos Instance;
+
+    private AudioSource audioSource;
+
     Vector2 cntrl;
 
     public override void init()
@@ -16,11 +23,18 @@ public class Player1 : Fighter
     public void Start()
     {
         init();
+        
+    }
+
+    public void EjecutarSonido(AudioClip sonido)
+    {
+        audioSource.PlayOneShot(sonido);
     }
 
     // Update is called once per frame
     void Update()
     {
+
         cntrl = new Vector2(Input.GetAxis("Horizontal"), 
             Input.GetAxis("Vertical"));
 
@@ -38,11 +52,13 @@ public class Player1 : Fighter
         if (Input.GetKeyDown(KeyCode.Z))
         {
             StartCoroutine(Punch());
-
-            isGuard = Input.GetKey(KeyCode.X);
-
-            anim.SetBool("IsGuard", isGuard);
+            EjecutarSonido(golpeSonido);
         }
+            
+
+        isGuard = Input.GetKey(KeyCode.X);
+
+        anim.SetBool("IsGuard", isGuard);
             
         //if(_lifes <= 0)
         //{
@@ -65,6 +81,12 @@ public class Player1 : Fighter
         else
         {
             rb.velocity = Vector3.zero;
+        }
+
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            Debug.Log("Salir...");
+            Application.Quit();
         }
     }
 }

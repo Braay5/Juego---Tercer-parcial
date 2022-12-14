@@ -9,22 +9,25 @@ public class FloatingTextManager : MonoBehaviour
 {
     [SerializeField]
     float speed;
+    [SerializeField]
+    float lifeTime;
 
     TextMesh tm;
 
     void Start()
     {
         tm = GetComponent<TextMesh>();
+        Destroy(gameObject, lifeTime);
     }
 
-    void Init(string text)
+    public void Init(string text)
     {
-
+        tm.text = text;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        transform.position += Vector3.up * speed * Time.deltaTime;
     }
 }
