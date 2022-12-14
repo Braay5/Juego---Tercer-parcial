@@ -23,7 +23,7 @@ public class Fighter : MonoBehaviour
     protected static Vector2 LimitsY = new Vector2(0f, -3.68f);
 
     [SerializeField]
-    int _lifes = 3;
+     public int _lifes = 3;
     protected int lifes 
     { 
         get{ return _lifes;} 
@@ -110,7 +110,10 @@ public class Fighter : MonoBehaviour
         anim.SetTrigger("GetPunch");
         lifes--;
         if (lifes <= 0)
+        {
             whenDie.Invoke();
+        }
+            
     }
 
     public void AutoDestroy()
