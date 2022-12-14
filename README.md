@@ -18,6 +18,7 @@ Mov. Abajo: flecha abajo - letra "s"
 Mov Arriba: flecha arriba - letra "w"
 Golpe: letra "z"
 Defensa: letra"x"
+Para salir del juego, ya iniciado, usa la tecla "p"
 
 Para descargar el juego, ve al reposirtorio "Juego---Tercer-parcial", entra a la carpeta "Juego tres UTECA", da click en la carpeta "Juego", no en la carpeta "Juego ahora sí", en la carpeta "Juego", y da click en "Juego tres UTECA.exe".
 
